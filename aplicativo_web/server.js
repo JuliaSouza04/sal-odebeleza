@@ -18,4 +18,4 @@ listen(){
 
 }
 
-module.exports = new Server(3001)
+module.exports = new Server(3000)
