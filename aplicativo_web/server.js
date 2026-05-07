@@ -9,6 +9,8 @@ class Server{
 constructor(port){
   this.app = express()
   this.port = port
+  this.app.use(express.json())
+  this.app.use(express.urlencoded({extended: true}))
   this.app.use(router)
   this.app.set("view engine", "ejs")
   this.app.set("views", "mvc/views")

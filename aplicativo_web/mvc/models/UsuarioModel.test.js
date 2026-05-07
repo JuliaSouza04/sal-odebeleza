@@ -1,16 +1,14 @@
 class Usuario{
-    
-    #nome
     #email
     #senha
+    #nome
 
-    constructor(nome, email, senha){
+    constructor(email, senha, nome){
         this.#validarEmail(email)
 
-        this.#nome = nome
         this.#email = email
         this.#senha = senha
-        
+        this.#nome = nome
     }
 
     get email(){
@@ -40,4 +38,4 @@ class Usuario{
 }
 
 
-module.exports = Usuario
+const usuario = new Usuario("a@b.com", "123","Zé")
