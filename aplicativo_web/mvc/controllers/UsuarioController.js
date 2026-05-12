@@ -12,8 +12,8 @@ class UsuarioController {
     }
 
     async usuarioListView(req, res){
-        const usuarios = await this.usuarioService.buscarTodosUsuario()
-        res.render("Usuario/ListeView", {
+        const usuarios = await this.usuarioService.buscarTodosUsuarios()
+        res.render("Usuario/ListView", {
             usuarios: usuarios
         })
     }
@@ -30,7 +30,6 @@ class UsuarioController {
     }
 
    async usuarioPostAsync(req, res){
-    console.log(req, res)
     const id = await this.usuarioService.cadastrarUsuario(
         req.body.username,
         req.body.email,
@@ -41,26 +40,21 @@ class UsuarioController {
 
 
    async usuarioPutAsync(req, res){
-    console.log(req, res)
-    const affectedRows = await this.usuarioService.cadastrarUsuario(
+
+    const affectedRows = await this.usuarioService.atualizarUsuario(
         req.body.id,
         req.body.username,
         req.body.email,
         req.body.senha
     )
-    res.json({id:id})
+    res.json({affectedRows: affectedRows})
    }
 
    async usuarioDeleteAsync(req, res){
-    console.log(req, res)
-    const affectedRows = await this.usuarioService.DeletarUsuario(req.params.id)
 
-        req.body.id,
-        req.body.username,
-        req.body.email,
-        req.body.senha
+    const affectedRows = await this.usuarioService.deletarUsuario(req.params.id)
 
-    res.json({id:id})
+    res.json({affectedRows: affectedRows})
    }
 
 

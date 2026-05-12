@@ -1,30 +1,30 @@
-class AtendimentoController {
+//class AtendimentoController {
 
-    listar(req, res){
+    //listar(req, res){
         res.render("Atendimento/ListagemView")
-    }
+    //}
 
-    cadastrar(req, res){
+    //cadastrar(req, res){
         res.render("Atendimento/CadastrarView")
-    }
-
-    cadastrarView(req, res){
+    //}
+/
+    //cadastrarView(req, res){
         res.render("Atendimento/CadastrarView")
-    }
+   // }
 
-    excluir(req, res){
+    //excluir(req, res){
         res.render("Atendimento/ExcluirView")
-    }
+    //}
 
-    atualizar(req, res){
+    //atualizar(req, res){
         res.render("Atendimento/AtualizarView")
-    }
+    //}
 
-    atualizarView(req, res){
+    //atualizarView(req, res){
         res.render("Atendimento/AtualizarView")
-    }
-}
+    //}
+//}
 
 
 
-module.exports = new AtendimentoController()
+//module.exports = new AtendimentoController()

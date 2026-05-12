@@ -1,5 +1,5 @@
-const server = require("./server");
 const sequelize = require("./database/dbconfig");
+const server = require("./server");
 
 
 async function run(){
@@ -20,7 +20,7 @@ async function run(){
         server.listen();
 
     }catch(error){
-        console.error('Erro ao iniciar a aplicação', error);
+        console.error('Erro ao iniciar a aplicação:', error);
     }
 }
 

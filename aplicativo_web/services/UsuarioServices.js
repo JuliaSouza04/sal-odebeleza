@@ -1,4 +1,4 @@
-const { password } = require("../database/database");
+
 const Usuario = require("../mvc/models/UsuarioModel");
 const UsuarioSchema = require("../schemas/UsuarioSchemas")
 
@@ -11,7 +11,7 @@ class UsuarioService {
     }
 
     async buscarUsuario(id){
-        const dado = this.#usuarioSchemas.findOne({
+        const dado = await this.#usuarioSchemas.findOne({
             where: {id: id}
         });
 
@@ -20,16 +20,16 @@ class UsuarioService {
         }
 
         const usuario = new Usuario(
+            dado.username,
             dado.email,
-            dado.password,
-            dado.username
+            dado.password
         )
         usuario.id = dado.id
 
         return usuario
     }
 
-    async DeletarUsuario(id){
+    async deletarUsuario(id){
         const usuario =  await this.#usuarioSchemas.findOne({
             where: {id: id}
         });
@@ -46,7 +46,7 @@ class UsuarioService {
         const usuarios = []
         const dado = await this.#usuarioSchemas.findAll();
 
-        for(const usuario of dados){
+        for(const usuario of dado){
 
             const u = new Usuario(
                  usuario.username,
@@ -57,6 +57,7 @@ class UsuarioService {
             u.id = usuario.id
 
             usuarios.push(u)
+    
         }
          return usuarios
     }
@@ -64,7 +65,8 @@ class UsuarioService {
    
 
     async cadastrarUsuario(username, email, senha){
-        const usuario = new Usuario(username, email, senha,)
+
+        const usuario = new Usuario(username, email, senha)
 
         const id = await this.#usuarioSchemas.create({
             username: usuario.nome,
@@ -72,13 +74,13 @@ class UsuarioService {
             password: usuario.senha
         })
 
-        return id
+        return id;
         
     }
 
-    async AtualizarUsuario(id, username, email, senha){
+    async atualizarUsuario(id, username, email, senha){
 
-        let rows=0
+        let rows=0;
         
 
         const usuario = await this.buscarUsuario(id)
@@ -91,23 +93,22 @@ class UsuarioService {
                 senha || usuario.password)    
 
             const afferctedRows = await this.#usuarioSchemas.update({
-                username: usuario.nome,
-                email: usuario.email,
-                password: usuario.senha
+                username: modelnome,
+                email: model.email,
+                password: model.senha
             }, {
                 where:{
-                    id:id
+                    id: id
                 }
-            }
-            )
+            })
 
             rows = afferctedRows
 
         }
 
-        return rows
+        return rows;
         
     }
 }
 
-module.exports = UsuarioService
+module.exports = UsuarioService;

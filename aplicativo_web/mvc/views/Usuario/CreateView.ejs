@@ -3,39 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Create</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            background: linear-gradient(135deg, #e7abc2, rgb(216, 176, 228));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .main-container{
+            padding: 40px;
+        }
+
+        .container-custom{
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .title{
+            text-align: center;
+            margin-bottom: 30px;
+            color: #d63384;
+            font-weight: 700;
+        }
+
+        .form-label{
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-control{
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+        }
+
+        .form-control:focus{
+            border-color: #d63384;
+            box-shadow: 0 0 0 0.2rem rgba(214, 51, 132, 0.2);
+        }
+
+        .btn-custom{
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #d63384, #c77dff);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-custom:hover{
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .navbar-custom{
+            background: white;
+            padding: 18px 40px;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo{
+            font-size: 1.6rem;
+            font-weight: 700;
+            color:#d63384;
+        }
+
+        .meu-link{
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meu-link-hover{
+            color: #c77dff;
+            transform: translateY(-2px);
+        }
+    </style>
+
 </head>
 <body>
-    <form>
-        <h1>Cadrastro de Usuário</h1>
-        <div>
-            <div>
-                <label for="username">Username</label>
-            </div>
-            <div>
-                <input type="text" id="username">
-            </div>
-        </div>
-        <div>
-            <div>
-                <label for="email">E-mail</label>
-            </div>
-            <div>
-                <input type="email" id="email">
-            </div>
-        </div>
-        <div>
-            <div>
-                <label for="senha">Senha</label>
-            </div>
-            <div>
-                <input type="password" id="senha">
-            </div>
-        </div>
-            <button id="btnCadastrarUsuario" type="submit">Cadastrar</button>
-        </div>
-
-    </form>
+    <div class="main-container">
+        <div class="container-custom">
+            <form>
+                <h1 class="title">Cadastro de Usuário</h1>
+                <div class="mb-3">
+                    <div>
+                        <label for="username" class ="form-label">Username</label>
+                    </div>
+                    <div>
+                        <input type="text" id="username" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div >
+                        <label for="email" class="form-label">E-mail</label>
+                    </div>
+                    <div>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div>
+                        <label for="senha" class="form-label">Senha</label>
+                    </div>
+                    <div>
+                        <input type="password" id="senha" class="form-control">
+                    </div>
+                </div>
+                    <button id="btnCadastrarUsuario" type="submit" class="btn-custom">Cadastrar</button>
+                </div>
+            </form>
+        </div> 
+    </div>
 </body>
 <script>
 
@@ -49,8 +159,6 @@
         const username = document.getElementById("username")
         const email = document.getElementById("email")
         const senha = document.getElementById("senha")
-
-        console.log(username.value)
         
         const url = "/user/create"
 

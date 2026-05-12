@@ -31,14 +31,15 @@ class Usuario{
         return this.#nome
     }
 
-    set email(valor){
-        this.#email = valor
-    }
-
     set id(valor){
         this.#id = valor
     }
 
+    set email(valor){
+        this.#email = valor
+    }
+
+    
     #validarEmail(email){
         const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
