@@ -23,9 +23,9 @@
         <% for(usuario of usuario) {%>
         <tr>
             <td><% for= usuario.id %></td>
-            <td><% for= usuario.username %></td>
+            <td><% for= usuario.nome %></td>
             <td><% for= usuario.email %></td>
-            <td><% for= usuario.password %></td>
+            <td><% for= usuario.senha %></td>
             <td>
                 <a href="user/edit/<% for= usuario.id %>">Editar</a>
                 <button onclick="apagarUsuario('<% for= usuario.id %>')" id="btnApagar">Apagar</button>
