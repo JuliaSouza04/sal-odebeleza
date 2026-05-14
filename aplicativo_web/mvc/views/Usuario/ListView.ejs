@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>List</title>
 
@@ -67,9 +68,84 @@
         .btn-edit:hover, .btn-delete:hover{
             opacity: 0.8;
         }
+
+        .sidebar{
+            width: 100px;
+            background:white;
+            height: 100vh;
+            padding: 30px 20px;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            gap: 20px;
+        }
+
+        .logo-title{
+            color:#d63384 ;
+            font-size: 1.0rem;
+            font-weight: 700;
+        }
+
+        .sidebar-menu{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .menu-item{
+            text-decoration: none;
+            color: #555;
+            padding: 14px;
+            border-radius: 12px;
+            transition: 0.3s;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.2rem;
+        }
+
+        .menu-item:hover{
+            background: #ecd4e0;
+            color: #d63384;
+            transform: translateX(5px);
+        }
+
+        .menu-active{
+            background: linear-gradient(90deg,#d63384);
+            color: white;
+        }
+
+        .content{
+            margin-left: 260px;
+            width: calc(100% - 260px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        } 
     </style>
 </head>
 <body>
+    <div class="sidebar">
+        <div class="logo-area">
+            <h2 class="logo-title">Divina Essência</h2>    
+        </div>
+        <div class="sidebar-menu">
+            <a href="/user/create" class="menu-item">
+                <i class="bi bi-person-plus"></i></a>
+            <a href="/user/list" class="menu-item menu-active">
+                <i class="bi bi-person"></i></a>
+        </div>
+    </div>
+    <div class="content">
+
     <div class="table-container">
         <h1 class="title">Lista de Usuário</h1>
             <table class="table table-hover align-middle">
@@ -89,31 +165,62 @@
                             <td><%= usuario.id %></td>
                             <td><%= usuario.nome %></td>
                             <td><%= usuario.email %></td>
-                            <td><%= usuario.senha %></td>
+                            <td>******</td>
                             <td class="d-flex gap-2">
                                 <a href="/user/edit/<%= usuario.id %>" class="btn-edit">Editar</a>
-                                <button onclick="apagarUsuario('<%= usuario.id %>')" id="btnApagar" class="btn-delete">Apagar</button>
+                                <button onclick="apagarUsuario('<%= usuario.id %>')" id="btnApagar" class="btn-delete" type="button">Apagar</button>
                             </td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
-        </body>
+         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
 <script>
     async function apagarUsuario(id){
-        const url = "/user/delete/"+id
+        const resultado = await Swal.fire({
+            title: 'Deseja apagar?',
+            text: 'Essa ação não poderá ser desfeita.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#b57edc',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apagar',
+            cancelButtonText: 'Cancelar',
+            background: '#fff',
+            color: '#555'
+        })
 
-        const response = await fetch(url,{method:'DELETE',})
+        if(resultado.isConfirmed){
+           const url = "/user/delete/"+id
+            const response = await fetch(url, {method:'DELETE'})
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if(!response.ok){
-            console.log("Ocorreu um erro na requisição")
+            if(!response.ok){
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao apagar.',
+                    icon: 'error',
+                    confirmButtonColor: '#b57edc'
+                })
+                return
+            }
+
+            Swal.fire({
+                title: 'Apagado!',
+                text: 'Usuário removido com sucesso.',
+                icon: 'success',
+                confirmButtonColor: '#b57edc'
+            })
+
+            console.log(data)
+            setTimeout(() => {
+            location.reload() 
+            },1200) 
         }
-
-        console.log(data)
-        location.reload()
     }
 </script>
 </html>
