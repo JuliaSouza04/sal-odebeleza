@@ -93,7 +93,7 @@ class UsuarioService {
                 senha || usuario.password)    
 
             const afferctedRows = await this.#usuarioSchemas.update({
-                username: modelnome,
+                username: model.nome,
                 email: model.email,
                 password: model.senha
             }, {

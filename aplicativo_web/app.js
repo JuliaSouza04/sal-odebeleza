@@ -1,4 +1,6 @@
 const sequelize = require("./database/dbconfig");
+const Usuario = require("./schemas/UsuarioSchemas");
+const Atendimento = require("./schemas/AtendimentoSchemas");
 const server = require("./server");
 
 
@@ -8,10 +10,20 @@ async function run(){
 
     try{
 
+        Usuario.hasMany(Atendimento,{
+            foreignKey:"usuarioId",
+            as:"atendimentos"
+        })
+
+        Atendimento.belongsTo(Usuario, {
+            foreignKey:"usuarioId",
+            as:"users"
+        })
+
         await sequelize.authenticate()
         console.log('Conexão com o banco realizada com sucesso.');
 
-        await sequelize.sync({alter:true});
+        await sequelize.sync({force:true});
         console.log('Modelos sincronizados');
 
     
